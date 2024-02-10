@@ -1,0 +1,17 @@
+#start of the network service section
+networks:
+  #creation of an external ip with macvlan
+  network-name:
+    name: displayed-docker-network-name
+    driver: macvlan
+    driver_opts:
+      parent: ens18
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
+          gateway: 10.0.0.1
+          ip_range: 10.0.0.5/32 #with a differnt CIDR more services could use externel IPs. Set under service: networks: network-name: ipv4_address: 10.0.0.6
+          
+  #creation of a normal docker bridge without driver set
+  network-name2:
+    name: internal-example-network
